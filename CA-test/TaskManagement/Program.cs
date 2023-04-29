@@ -23,6 +23,10 @@ namespace TaskManagement
                         LoginCommand loginCommand = new LoginCommand();
                         loginCommand.Handle();
                         break;
+                    case "/update-language-preference":
+                        LanguageCommand languageCommand = new LanguageCommand();
+                        languageCommand.Handle();
+                        break;
                     case "/exit":
                         Console.WriteLine("Bye-bye");
                         return;
