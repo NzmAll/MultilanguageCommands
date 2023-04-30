@@ -15,22 +15,20 @@ namespace TaskManagement
             int choice = int.Parse(Console.ReadLine()!);
 
             string language;
-            if (choice == 1)
+            switch (choice)
             {
-                language = "Azerbaijani";
-            }
-            else if (choice == 2)
-            {
-                language = "Russian";
-            }
-            else if (choice == 3)
-            {
-                language = "English";
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice, please try again");
-                return;
+                case 1:
+                    language = "Azerbaijani";
+                    break;
+                case 2:
+                    language = "Russian";
+                    break;
+                case 3:
+                    language = "English";
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice, please try again");
+                    return;
             }
 
             Console.WriteLine($"Language preference set to {language}");

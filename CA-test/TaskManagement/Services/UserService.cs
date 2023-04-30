@@ -10,7 +10,7 @@ namespace TaskManagement.Services
 {
     public static class UserService
     {
-        public static User CurrentUser { get; set; }
+        public static User? CurrentUser { get; set; }
         public static Language LanguagePreference { get; set; } = Language.Azerbaijani;
 
         public static void UpdateLanguagePreference(Language language)

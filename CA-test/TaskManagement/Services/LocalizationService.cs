@@ -10,9 +10,7 @@ namespace TaskManagement.Services
 {
     public class LocalizationService
     {
-        private Dictionary<string, Dictionary<string, string>> 
-            _translations = new Dictionary<string, Dictionary<string, string>>();
-
+        private readonly Dictionary<string, Dictionary<string, string>> _translations;
 
         public LocalizationService()
         {
@@ -21,34 +19,26 @@ namespace TaskManagement.Services
 
         public void AddTranslation(string languageCode, string messageKey, string messageTranslation)
         {
-            Dictionary<string, string> languageTranslations;
-            if (!_translations.TryGetValue(languageCode, out languageTranslations))
+            if (!_translations.ContainsKey(languageCode))
             {
-                languageTranslations = new Dictionary<string, string>();
-                _translations.Add(languageCode, languageTranslations);
+                _translations.Add(languageCode, new Dictionary<string, string>());
             }
 
-            if (!languageTranslations.ContainsKey(messageKey))
-            {
-                languageTranslations.Add(messageKey, messageTranslation);
-            }
+            _translations[languageCode][messageKey] = messageTranslation;
         }
 
         public string Translate(string languageCode, string messageKey)
         {
-            Dictionary<string, string> languageTranslations;
-            if (_translations.TryGetValue(languageCode, out languageTranslations))
+            if (_translations.TryGetValue(languageCode, out var languageTranslations))
             {
-                string messageTranslation;
-                if (languageTranslations.TryGetValue(messageKey, out messageTranslation))
+                if (languageTranslations.TryGetValue(messageKey, out var messageTranslation))
                 {
                     return messageTranslation;
                 }
             }
+
             return messageKey;
         }
     }
-
-
 
 }
